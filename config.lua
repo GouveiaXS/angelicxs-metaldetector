@@ -2,6 +2,30 @@ Config = {}
 
 Config.UseESX = true						-- Use ESX Framework
 Config.UseQBCore = false					-- Use QBCore Framework (Ignored if Config.UseESX = true)
+Config.PoliceAlertCooldown = 30             -- How long, in seconds for the police alert cooldown
+
+RegisterNetEvent('angelicxs-MDetector:CustomDisptach')
+AddEventHandler('angelicxs-MDetector:CustomDisptach', function(coordz)
+	-- CD_DISPATCH EXAMPLE BELOW
+--[[ 	local data = exports['cd_dispatch']:GetPlayerInfo()
+    TriggerServerEvent('cd_dispatch:AddNotification', {
+        job_table = {'police', 'bcso'}, 
+        coords = coordz,
+        title = '10-22 - Metal Detector Alarm',
+        message = 'A metal detector has triggered near '..data.street, 
+        flash = 0,
+        unique_id = tostring(math.random(0000000,9999999)),
+        blip = {
+            sprite = 225, 
+            scale = 1.2, 
+            colour = 5,
+            flashes = false, 
+            text = '10-22 - Metal Detector Alarm',
+            time = (5*60*1000),
+            sound = 1,
+        }
+    }) ]]
+end)
 
 
 --[[
@@ -17,6 +41,7 @@ Config.UseQBCore = false					-- Use QBCore Framework (Ignored if Config.UseESX =
 		items = OPTIONAL: Table of specific items that will set off alarm (only requires one of the items listed)
 		entity = OPTIONAL: If true, will spawn a metal detector at the location
 		heading = OPTIONAL: When entity = true, will adjust the detector to face the desired heading.
+        policeAlert = OPTIONAL: When true will send a police alert if triggered
 
 		*** Must use UseMainList and/or items in order for the detector to actually detect inventory items. If both are nil, alarm will not go off.**
 		*** sounds other than those listed below are not guaranteed to play, change at own risk ***
