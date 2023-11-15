@@ -6,6 +6,7 @@ PlayerGrade = nil
 
 local DetectorSpawn = false
 local DetectorEntity
+local CooldownTimer = false
 
 CreateThread(function()
 	if Config.UseESX then
@@ -151,6 +152,9 @@ function Search(detector)
         end
         if hasItem then
             TriggerServerEvent('angelicxs-MDetector:Server:SoundPlayer', detector)
+            if not CooldownTimer then
+                PoliceAlert()
+            end
         end
     end
 end
@@ -167,6 +171,20 @@ function Exempt(data)
 		end
 	end
 	return hasJob
+end
+
+function PoliceAlert()
+    CooldownTimer = true
+    local time = Config.PoliceAlertCooldown
+    TriggerEvent('angelicxs-MDetector:CustomDisptach')
+    while true do
+        Wait(1000)
+        time = time-1
+        if time <= 0 then
+            break
+        end
+    end
+    CooldownTimer = false
 end
 
 RegisterNetEvent('angelicxs-MDetector:SoundPlayer', function(detector)
