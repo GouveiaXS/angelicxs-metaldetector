@@ -1,94 +1,12 @@
 Config = {}
 
-Config.UseESX = true						-- Use ESX Framework
-Config.UseQBCore = false					-- Use QBCore Framework (Ignored if Config.UseESX = true)
-Config.PoliceAlertCooldown = 30             -- How long, in seconds for the police alert cooldown
+Config.UseESX = true
+Config.PoliceAlertCooldown = 30
 
 RegisterNetEvent('angelicxs-MDetector:CustomDisptach')
 AddEventHandler('angelicxs-MDetector:CustomDisptach', function(coordz)
-	-- CD_DISPATCH EXAMPLE BELOW
---[[ 	local data = exports['cd_dispatch']:GetPlayerInfo()
-    TriggerServerEvent('cd_dispatch:AddNotification', {
-        job_table = {'police', 'bcso'}, 
-        coords = coordz,
-        title = '10-22 - Metal Detector Alarm',
-        message = 'A metal detector has triggered near '..data.street, 
-        flash = 0,
-        unique_id = tostring(math.random(0000000,9999999)),
-        blip = {
-            sprite = 225, 
-            scale = 1.2, 
-            colour = 5,
-            flashes = false, 
-            text = '10-22 - Metal Detector Alarm',
-            time = (5*60*1000),
-            sound = 1,
-        }
-    }) ]]
+
 end)
-
-
---[[
-	USAGE
-	To add an detector, copy the table below and configure as needed:
-		coords = coords of center of detector
-		detectRadius = how far the detector can sense items
-		soundRadious = how far the detectors sound is able to reach
-		timer = how long the alarm goes off (used as a loop, alarm will continue to go off as long as they are in the radius and activating it)
-		sound = what sound the alarm makes
-		jobsExempt = OPTIONAL: Table of job keys that are will not set off the alarm
-		UseMainList = OPTIONAL: If true, will use the Config.MetalItems table as items that will set off alarm (only requires one of the items listed)
-		items = OPTIONAL: Table of specific items that will set off alarm (only requires one of the items listed)
-		entity = OPTIONAL: If true, will spawn a metal detector at the location
-		heading = OPTIONAL: When entity = true, will adjust the detector to face the desired heading.
-        policeAlert = OPTIONAL: When true will send a police alert if triggered
-
-		*** Must use UseMainList and/or items in order for the detector to actually detect inventory items. If both are nil, alarm will not go off.**
-		*** sounds other than those listed below are not guaranteed to play, change at own risk ***
-			sounds that work are based on siren list and include:
-				'SIRENS_AIRHORN', 'VEHICLES_HORNS_SIREN_1', 'VEHICLES_HORNS_SIREN_2',  'VEHICLES_HORNS_POLICE_WARNING', 'RESIDENT_VEHICLES_SIREN_WAIL_01', 'RESIDENT_VEHICLES_SIREN_WAIL_02', 
-				'RESIDENT_VEHICLES_SIREN_WAIL_03', 'RESIDENT_VEHICLES_SIREN_QUICK_01', 'RESIDENT_VEHICLES_SIREN_QUICK_02', 'RESIDENT_VEHICLES_SIREN_QUICK_03',
-				'VEHICLES_HORNS_AMBULANCE_WARNING', 'VEHICLES_HORNS_FIRETRUCK_WARNING',  'RESIDENT_VEHICLES_SIREN_FIRETRUCK_WAIL_01', 'RESIDENT_VEHICLES_SIREN_FIRETRUCK_QUICK_01'
-}
-]]
-
---[[
-	
-	ExampleLoction = {
-		{	-- example detector 1
-			coords = {xxxx, yyyy, zzzz}, detectRadius = 0.8, soundRadious = 10, timer = 2000, sound = 'VEHICLES_HORNS_AMBULANCE_WARNING',
-			jobsExempt = {
-				["police"] = 0,
-				["ambulance"] = 0,
-			},
-			UseMainList = true,
-			items = {
-				"water",
-			},
-	
-		},
-		{	-- example detector 2
-			coords = {xxxx, yyyy, zzzz}, detectRadius = 0.8, soundRadious = 10, timer = 2000, sound = 'VEHICLES_HORNS_AMBULANCE_WARNING',
-			items = {
-				"water",
-			},
-	
-		},
-		{	-- example detector 3
-			coords = {xxxx, yyyy, zzzz}, detectRadius = 0.8, soundRadious = 10, timer = 2000, sound = 'VEHICLES_HORNS_AMBULANCE_WARNING',
-			UseMainList = true,
-			items = {
-				"water",
-			},
-	
-		},
-		{	-- example detector 4
-			coords = {xxxx, yyyy, zzzz}, detectRadius = 0.8, soundRadious = 10, timer = 2000, sound = 'VEHICLES_HORNS_AMBULANCE_WARNING',
-			UseMainList = true,
-			entity = true, heading = 0
-		},
-	},
-]]
 
 Config.Detectors = {
 
@@ -134,11 +52,13 @@ Config.Detectors = {
 			UseMainList = true,
 		},
 	},
- 	UpperPillbox = {
-		{	-- main doors
-			coords = {299.7238, -584.8970, 43.2841}, detectRadius = 0.8, soundRadious = 10, timer = 2000, sound = 'VEHICLES_HORNS_AMBULANCE_WARNING',
+
+
+ 	Vanilla = {
+		{
+			coords = {129.0024, -1298.9150, 29.2327}, detectRadius = 1, soundRadious = 10, timer = 5000, sound = 'VEHICLES_HORNS_AMBULANCE_WARNING',
 			items = {
-				"water",
+				"fireplace",
 			},
 	
 		},

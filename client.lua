@@ -1,5 +1,5 @@
-ESX = nil
-QBCore = nil
+ESX = exports["es_extended"]:getSharedObject()
+
 PlayerData = nil
 PlayerJob = nil
 PlayerGrade = nil
@@ -8,46 +8,6 @@ local DetectorSpawn = false
 local DetectorEntity
 local CooldownTimer = false
 
-CreateThread(function()
-	if Config.UseESX then
-		ESX = exports["es_extended"]:getSharedObject()
-	
-		while not ESX.IsPlayerLoaded() do
-			Wait(100)
-		end
-	
-		PlayerData = ESX.GetPlayerData()
-		PlayerJob = PlayerData.job.name
-		PlayerGrade = PlayerData.job.grade
-
-		RegisterNetEvent("esx:setJob", function(job)
-			PlayerJob = job.name
-			PlayerGrade = job.grade
-		end)
-
-	elseif Config.UseQBCore then
-
-		QBCore = exports["qb-core"]:GetCoreObject()
-			
-		CreateThread(function ()
-			while true do
-				PlayerData = QBCore.Functions.GetPlayerData()
-				if PlayerData.citizenid ~= nil then
-					PlayerJob = PlayerData.job.name
-					PlayerGrade = PlayerData.job.grade.level
-					break
-				end
-				Wait(100)
-			end
-		end)
-
-
-		RegisterNetEvent("QBCore:Client:OnJobUpdate", function(job)
-			PlayerJob = job.name
-			PlayerGrade = job.grade.level
-		end)
-	end
-end)
 
 CreateThread(function()
     while true do
